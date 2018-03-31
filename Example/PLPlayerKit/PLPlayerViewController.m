@@ -64,7 +64,13 @@ UITextViewDelegate
             | UIViewAutoresizingFlexibleWidth
             | UIViewAutoresizingFlexibleHeight;
             [self.view addSubview:playerView];
-            
+
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                // 1s之后暂停，并修改frame，则出现画面拉伸
+                [self.player pause];
+                playerView.frame = CGRectMake(playerView.frame.origin.x, playerView.frame.origin.y, 100, 500);
+            });
+
             // test input
             UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(15, 80, CGRectGetWidth(self.view.bounds) - 30, 150)];
             textView.delegate = self;
