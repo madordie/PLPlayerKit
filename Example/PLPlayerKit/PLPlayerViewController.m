@@ -113,7 +113,8 @@ UITextViewDelegate
     PLPlayerOption *option = [PLPlayerOption defaultOption];
     [option setOptionValue:@10 forKey:PLPlayerOptionKeyTimeoutIntervalForMediaPackets];
     
-    self.player = [PLPlayer playerWithURL:self.URL option:option];
+    self.player = [PLPlayer new];
+    NSLog(@"%@", @([self.player openPlayerWithURL:self.URL]));
     self.player.delegate = self;
     self.player.delegateQueue = dispatch_get_main_queue();
     self.player.backgroundPlayEnable = enableBackgroundPlay;
